@@ -78,6 +78,17 @@ b.on( 'update', function () {
 
 ```
 
+## FAQ
+
+### your build does not include the latest changes to your files.
+
+Mmm... that's weird, but the option `--recreate` should destroy the cache and create it again
+
+### I have added a new transform and the build is not using its
+
+Since persistify will only work on the files that have changed, and adding a transform
+does not cause a file change it is better to just use `--recreate` after adding a new trasform or plugin
+
 ## Changelog
 
 [Changelog](./changelog.md)
