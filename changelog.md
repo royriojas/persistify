@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.1.2
+- **Build Scripts Changes**
+  - Add keywords - [d46de42]( https://github.com/royriojas/persistify/commit/d46de42 ), [royriojas](https://github.com/royriojas), 19/08/2015 05:46:28
+
+    
 ## v0.1.1
 - **Features**
   - first working version - [dad17de]( https://github.com/royriojas/persistify/commit/dad17de ), [royriojas](https://github.com/royriojas), 19/08/2015 05:45:00
