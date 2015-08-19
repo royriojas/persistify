@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.1.5
+- **Build Scripts Changes**
+  - Add keywords - [c91c7f7]( https://github.com/royriojas/persistify/commit/c91c7f7 ), [royriojas](https://github.com/royriojas), 19/08/2015 06:07:20
+
+    
 ## v0.1.4
 - **Documentation**
   - Add FAQ - [35a487a]( https://github.com/royriojas/persistify/commit/35a487a ), [royriojas](https://github.com/royriojas), 19/08/2015 06:04:07
