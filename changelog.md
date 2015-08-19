@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.1.3
+- **Documentation**
+  - Fixed code blocks style - [d5d7fcb]( https://github.com/royriojas/persistify/commit/d5d7fcb ), [royriojas](https://github.com/royriojas), 19/08/2015 05:47:42
+
+    
 ## v0.1.2
 - **Build Scripts Changes**
   - Add keywords - [d46de42]( https://github.com/royriojas/persistify/commit/d46de42 ), [royriojas](https://github.com/royriojas), 19/08/2015 05:46:28
