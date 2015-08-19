@@ -77,6 +77,8 @@
     "cache",
     "incremental build",
     "incremental browserify",
+    "browserify incremental",
+    "browserify-incremental",
     "browserify with cache",
     "browserify plugin",
     "browserify-plugin",
