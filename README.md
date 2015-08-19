@@ -45,7 +45,7 @@ persistify src/foo.js -t babelify -o dist/foo.js --watch
 
 ## as a node module
 
-```
+```javascript
 var persistify = require( 'persistify' );
 
 var b = persistify( { }, { watch: true } );
