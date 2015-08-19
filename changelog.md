@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.1.4
+- **Documentation**
+  - Add FAQ - [35a487a]( https://github.com/royriojas/persistify/commit/35a487a ), [royriojas](https://github.com/royriojas), 19/08/2015 06:04:07
+
+    
 ## v0.1.3
 - **Documentation**
   - Fixed code blocks style - [d5d7fcb]( https://github.com/royriojas/persistify/commit/d5d7fcb ), [royriojas](https://github.com/royriojas), 19/08/2015 05:47:42
