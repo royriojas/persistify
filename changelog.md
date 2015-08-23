@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.1.6
+- **Bug Fixes**
+  - missing browserify dependency to be able to use it without watch mode - [2abf988]( https://github.com/royriojas/persistify/commit/2abf988 ), [Roy Riojas](https://github.com/Roy Riojas), 22/08/2015 18:51:42
+
+    
 ## v0.1.5
 - **Build Scripts Changes**
   - Add keywords - [c91c7f7]( https://github.com/royriojas/persistify/commit/c91c7f7 ), [royriojas](https://github.com/royriojas), 19/08/2015 06:07:20
