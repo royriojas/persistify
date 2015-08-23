@@ -35,7 +35,6 @@
   ],
   "devDependencies": {
     "babelify": "^6.1.3",
-    "browserify": "^11.0.1",
     "changelogx": "^1.0.18",
     "esbeautifier": "^4.2.11",
     "eslinter": "^2.3.3",
@@ -44,6 +43,7 @@
     "react": "^0.13.3"
   },
   "dependencies": {
+    "browserify": "^11.0.1",
     "file-entry-cache": "^1.0.1",
     "flat-cache": "^1.0.3",
     "glob-expand": "^0.1.0",
