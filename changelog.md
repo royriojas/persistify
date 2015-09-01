@@ -1,5 +1,11 @@
 
 # persistify - Changelog
+## v0.1.7
+- **Documentation**
+  - Add a note about cache usage and a comment about the browserify options - [cfd3fe5]( https://github.com/royriojas/persistify/commit/cfd3fe5 ), [Roy Riojas](https://github.com/Roy Riojas), 31/08/2015 18:18:45
+
+    Update README.md
+    
 ## v0.1.6
 - **Bug Fixes**
   - missing browserify dependency to be able to use it without watch mode - [2abf988]( https://github.com/royriojas/persistify/commit/2abf988 ), [Roy Riojas](https://github.com/Roy Riojas), 22/08/2015 18:51:42
