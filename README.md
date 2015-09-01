@@ -43,12 +43,15 @@ persistify src/foo.js -o dist/foo.js --watch
 persistify src/foo.js -t babelify -o dist/foo.js --watch
 ```
 
-## as a node module
+## As a node module
 
 ```javascript
 var persistify = require( 'persistify' );
 
-var b = persistify( { }, { watch: true } );
+var b = persistify( { 
+  //browserify options here. e.g
+  // debug: true 
+  }, { watch: true } );
 
 b.add( './demo/dep1.js' );
 
@@ -80,11 +83,19 @@ b.on( 'update', function () {
 
 ## FAQ
 
-### your build does not include the latest changes to your files.
+### My less files are not detected as changed when using a transformation like `lessify`. Why?
 
-Mmm... that's weird, but the option `--recreate` should destroy the cache and create it again
+In short, because those files are not loaded thru browserify and the cache will ignore them. use `--recreate` to recreate the cache. **TODO**: Add an option to never cache certain type of files so at least this works for the javascript ones.
 
-### I have added a new transform and the build is not using its
+Long answer below:
+So far `persistify` will only save to disk the **browserify cache**, if some transform loads a file during the transformation
+process the change to that will not be detected. Maybe we need to make the transforms to also be able to create entries in the browserify cache, at least to list the dependencies of the file being transformed (common case in transforms that handle `less`, `sass` or `jade` code). 
+
+### My build does not include the latest changes to my files! not detecting changed files?
+
+Mmm... that's weird, but the option `--recreate` should destroy the cache and create it again which most of the times should fix your issue.
+
+### I have added a new transform and the build is not using its magic!
 
 Since persistify will only work on the files that have changed, and adding a transform
 does not cause a file change it is better to just use `--recreate` after adding a new trasform or plugin
