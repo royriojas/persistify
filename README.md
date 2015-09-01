@@ -18,6 +18,38 @@ Add unit tests
 npm i -g persistify
 ```
 
+## CLI options
+
+Apart from all the browserify and watchify options the following are also available:
+
+```bash
+Standard Options:
+
+  --outfile=FILE, -o FILE
+
+    This option is required. Write the browserify bundle to this file. If
+    the file contains the operators `|` or `>`, it will be treated as a
+    shell command, and the output will be piped to it (not available on
+    Windows).
+
+  --verbose, -v                     [default: false]
+
+    Show when a file was written and how long the bundling took (in
+    seconds).
+
+  --version
+
+    Show the persistify, watchify and browserify versions with their module paths.
+
+  --watch                          [default: false]
+
+    if true will use watchify instead of browserify
+
+  --recreate                       [default: false]
+
+    if set will recreate the cache. Useful when transforms and cached files refuse to cooperate
+```
+
 ## Examples
 
 ```bash
@@ -48,9 +80,9 @@ persistify src/foo.js -t babelify -o dist/foo.js --watch
 ```javascript
 var persistify = require( 'persistify' );
 
-var b = persistify( { 
+var b = persistify( {
   //browserify options here. e.g
-  // debug: true 
+  // debug: true
   }, { watch: true } );
 
 b.add( './demo/dep1.js' );
@@ -89,7 +121,7 @@ In short, because those files are not loaded thru browserify and the cache will 
 
 Long answer below:
 So far `persistify` will only save to disk the **browserify cache**, if some transform loads a file during the transformation
-process the change to that will not be detected. Maybe we need to make the transforms to also be able to create entries in the browserify cache, at least to list the dependencies of the file being transformed (common case in transforms that handle `less`, `sass` or `jade` code). 
+process the change to that will not be detected. Maybe we need to make the transforms to also be able to create entries in the browserify cache, at least to list the dependencies of the file being transformed (common case in transforms that handle `less`, `sass` or `jade` code).
 
 ### My build does not include the latest changes to my files! not detecting changed files?
 
