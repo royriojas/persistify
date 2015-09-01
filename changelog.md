@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.1.8
+- **Documentation**
+  - Add info about the CLI usage - [899e311]( https://github.com/royriojas/persistify/commit/899e311 ), [royriojas](https://github.com/royriojas), 31/08/2015 18:34:05
+
+    
 ## v0.1.7
 - **Documentation**
   - Add a note about cache usage and a comment about the browserify options - [cfd3fe5]( https://github.com/royriojas/persistify/commit/cfd3fe5 ), [Roy Riojas](https://github.com/Roy Riojas), 31/08/2015 18:18:45
