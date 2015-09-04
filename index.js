@@ -1,6 +1,5 @@
 var through = require( 'through2' );
 var watchify = require( 'watchify' );
-var expand = require( 'glob-expand' );
 var trim = require( 'jq-trim' );
 
 module.exports = function ( browserifyOpts, opts, argv ) {
@@ -39,14 +38,29 @@ module.exports = function ( browserifyOpts, opts, argv ) {
 
   var b = argv ? fromArgs( argv, browserifyOpts ) : require( 'browserify' )( browserifyOpts );
 
-  var depFiles = expand( Object.keys( persistifyCache.cache ) );
+  function normalizeCache( removeDeletedOnly ) {
+    var cachedFiles = Object.keys( browserifyOpts.cache );
 
-  var changedFiles = depsCacheFile.getUpdatedFiles( depFiles );
-  if ( changedFiles.length > 0 ) {
-    changedFiles.forEach( function ( file ) {
-      delete persistifyCache.cache[ file ];
+    var res = depsCacheFile.analyzeFiles( cachedFiles );
+
+    var changedFiles = res.changedFiles;
+    var notFoundFiles = res.notFoundFiles;
+
+    var changedOrNotFound = removeDeletedOnly ? notFoundFiles : changedFiles.concat( notFoundFiles );
+
+    if ( changedOrNotFound.length > 0 ) {
+      changedOrNotFound.forEach( function ( file ) {
+        delete browserifyOpts.cache[ file ];
+      } );
+    }
+
+    cache.setKey( 'persistifyArgs', {
+      cache: browserifyOpts.cache,
+      packageCache: browserifyOpts.packageCache
     } );
   }
+
+  normalizeCache();
 
   function collect() {
     b.pipeline.get( 'deps' ).push( through.obj( function ( row, enc, next ) {
@@ -78,8 +92,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
       } );
       stream.on( 'end', function () {
         setTimeout( function () {
-          cache.setKey( 'persistifyArgs', persistifyCache );
-          depsCacheFile.getUpdatedFiles( expand( Object.keys( persistifyCache.cache ) ) );
+          normalizeCache( true /* remove deleted only*/ );
           depsCacheFile.reconcile();
           cache.save();
         }, 0 );
