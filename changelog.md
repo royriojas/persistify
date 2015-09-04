@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.2.0
+- **Features**
+  - Remove deleted entries from the cache - [56544d3]( https://github.com/royriojas/persistify/commit/56544d3 ), [royriojas](https://github.com/royriojas), 04/09/2015 13:15:51
+
+    
 ## v0.1.8
 - **Documentation**
   - Add info about the CLI usage - [899e311]( https://github.com/royriojas/persistify/commit/899e311 ), [royriojas](https://github.com/royriojas), 31/08/2015 18:34:05
