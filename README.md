@@ -32,7 +32,7 @@ Standard Options:
     shell command, and the output will be piped to it (not available on
     Windows).
 
-  --verbose, -v                     [default: false]
+  --verbose, -v                    [default: false]
 
     Show when a file was written and how long the bundling took (in
     seconds).
@@ -48,6 +48,15 @@ Standard Options:
   --recreate                       [default: false]
 
     if set will recreate the cache. Useful when transforms and cached files refuse to cooperate
+
+  --never-cache, -n                [default: null]
+
+    a string that will be converted to a regula expression. If a file matches the returned regExp
+    will never be saved in the cache. Even if the file is in the cache already it will be ignored.
+
+    More than one pattern to be ignored can be specified by repeating this option with other regex
+    value to ignore
+
 ```
 
 ## Examples
@@ -73,6 +82,12 @@ persistify src/foo.js -o dist/foo.js --watch
 # (all the parameters are just passed to browserify
 # so it should work with any transform)
 persistify src/foo.js -t babelify -o dist/foo.js --watch
+
+# this will just use the cache and use two transforms
+# but will never add to the cache any files that match the `m.less` extension
+# since those files can also require files and those files won't be cached
+# this is the safer way to prevent those changes to be skipped because of the cache
+persistify src/foo.js -t babelify -t simpless -o dist/foo.js -n '\.less$'
 ```
 
 ## As a node module
@@ -117,11 +132,49 @@ b.on( 'update', function () {
 
 ### My less files are not detected as changed when using a transformation like `lessify`. Why?
 
-In short, because those files are not loaded thru browserify and the cache will ignore them. use `--recreate` to recreate the cache. **TODO**: Add an option to never cache certain type of files so at least this works for the javascript ones.
+Because those files are not loaded thru browserify so the cache will ignore them. use `-n, --never-cache` to specify certain files (or file types) to never be cached.
 
-Long answer below:
-So far `persistify` will only save to disk the **browserify cache**, if some transform loads a file during the transformation
-process the change to that will not be detected. Maybe we need to make the transforms to also be able to create entries in the browserify cache, at least to list the dependencies of the file being transformed (common case in transforms that handle `less`, `sass` or `jade` code).
+**Example: Using the cli**
+
+```bash
+# the following will exclude files ending in `.less` from being kept in the cache
+persistify src/foo.js -t lessify -o dist/foo.js -n '\.less$'
+```
+
+**Example: Using the node api**
+```javascript
+var persistify = require( 'persistify' );
+
+var b = persistify( {
+  //browserify options here. e.g
+  // debug: true
+  }, {
+    neverCache: [/\.less$/] // using the node api
+  } );
+
+b.add( './demo/dep1.js' );
+
+// when a file is ignored from the cache
+// a skip:cache event is fired on the bundle instance
+b.on('skip:cache', function (file) {
+  console.log( 'skipping the cache for', file);
+});
+
+b.on( 'error', function ( err ) {
+  console.log( 'error', err );
+} );
+
+function doBundle() {
+  b.bundle( function ( err, buff ) {
+    if ( err ) {
+      throw err;
+    }
+    require( 'fs' ).writeFileSync( './dist/bundle.js', buff.toString() );
+  } );
+}
+
+doBundle();
+```
 
 ### My build does not include the latest changes to my files! not detecting changed files?
 
@@ -129,8 +182,10 @@ Mmm... that's weird, but the option `--recreate` should destroy the cache and cr
 
 ### I have added a new transform and the build is not using its magic!
 
-Since persistify will only work on the files that have changed, and adding a transform
-does not cause a file change it is better to just use `--recreate` after adding a new trasform or plugin
+~Since persistify will only work on the files that have changed, and adding a transform
+does not cause a file change it is better to just use `--recreate` after adding a new trasform or plugin~
+
+Latest version of `persistify` will ignore the cache if the command used to execute it changes.
 
 ## Changelog
 

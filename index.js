@@ -2,6 +2,13 @@ var through = require( 'through2' );
 var watchify = require( 'watchify' );
 var trim = require( 'jq-trim' );
 
+var parseAsRegex = function parseAsRegex( regex ) {
+  if ( typeof regex === 'string' ) {
+    return new RegExp( regex );
+  }
+  return regex;
+};
+
 module.exports = function ( browserifyOpts, opts, argv ) {
   browserifyOpts = browserifyOpts || { };
   opts = opts || { };
@@ -26,20 +33,54 @@ module.exports = function ( browserifyOpts, opts, argv ) {
   // one if the previous one doesn't exist
   var depsCacheFile = fileEntryCache.create( depsCacheId );
 
-  var persistifyCache = cache.getKey( 'persistifyArgs' ) || {
-      cache: {}, packageCache: {}
-    };
+  var ignoreCache = false;
 
-  //var browserify = require( 'browserify' );
+  // if the command was specified this can be used
+  // as the cache buster
+  if ( opts.command ) {
+    var configHashPersisted = cache.getKey( 'configHash' );
+    var hashOfConfig = hash( opts.command );
+
+    ignoreCache = configHashPersisted !== hashOfConfig;
+
+    if ( ignoreCache ) {
+      cache.setKey( 'configHash', hashOfConfig );
+    }
+  }
+
+  var defaultCache = {
+    cache: {}, packageCache: {}
+  };
+
+  var persistifyCache = ignoreCache ? defaultCache : (cache.getKey( 'persistifyArgs' ) || defaultCache);
 
   browserifyOpts.cache = persistifyCache.cache;
   browserifyOpts.packageCache = persistifyCache.packageCache;
+
   var fromArgs = require( 'browserify/bin/args' );
 
   var b = argv ? fromArgs( argv, browserifyOpts ) : require( 'browserify' )( browserifyOpts );
 
   function normalizeCache( removeDeletedOnly ) {
     var cachedFiles = Object.keys( browserifyOpts.cache );
+
+    var neverCache = opts.neverCache;
+    if ( neverCache ) {
+      if ( !Array.isArray( neverCache ) ) {
+        neverCache = [ neverCache ];
+      }
+      cachedFiles.forEach( function ( file ) {
+        for (var i = 0; i < neverCache.length; i++) {
+          var regex = parseAsRegex( neverCache[ 0 ] );
+
+          if ( file.match( regex ) ) {
+            b.emit( 'skip:cache', file );
+            delete browserifyOpts.cache[ file ]; //esfmt-ignore-line
+            break;
+          }
+        }
+      } );
+    }
 
     var res = depsCacheFile.analyzeFiles( cachedFiles );
 
@@ -50,7 +91,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
 
     if ( changedOrNotFound.length > 0 ) {
       changedOrNotFound.forEach( function ( file ) {
-        delete browserifyOpts.cache[ file ];
+        delete browserifyOpts.cache[ file ]; //esfmt-ignore-line
       } );
     }
 
@@ -69,6 +110,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
         source: row.source,
         deps: xtend( { }, row.deps )
       };
+      b.emit( 'file', file ); // attempt to make latest watchify to work with persistify
       this.push( row );
       next();
     } ) );
@@ -76,10 +118,10 @@ module.exports = function ( browserifyOpts, opts, argv ) {
 
   if ( opts.watch ) {
     b = watchify( b );
-  } else {
-    collect();
-    b.on( 'reset', collect );
   }
+
+  collect();
+  b.on( 'reset', collect );
 
   var oldBundle = b.bundle;
   b.bundle = function () {
@@ -88,7 +130,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
     try {
       stream = oldBundle.apply( b, arguments );
       stream.on( 'error', function ( err ) {
-        console.error( err );
+        console.error( err ); // eslint-disable-line
       } );
       stream.on( 'end', function () {
         setTimeout( function () {
@@ -101,7 +143,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
         b.emit( 'bundle:done', end );
       } );
     } catch (ex) {
-      console.error( ex );
+      console.error( ex ); // eslint-disable-line
     }
 
     return stream;

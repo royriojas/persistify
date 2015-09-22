@@ -7,4 +7,4 @@ var hashString = require('hash-string');
 hashString('21313');
 
 var react = require('react');
-var trim = require('jq-trim');
+var trim = require('jq-trim')
