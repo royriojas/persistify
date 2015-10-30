@@ -18,7 +18,7 @@ function run() {
   var watch = persistifyArgs.watch;
   var recreate = persistifyArgs.recreate;
   var neverCache = persistifyArgs[ 'never-cache' ];
-  var cacheId = persistifyArgs['cache-id'];
+  var cacheId = persistifyArgs[ 'cache-id' ];
 
   var w = require( '../' )( null, {
     cacheId: cacheId,
