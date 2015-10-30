@@ -1,5 +1,14 @@
 
 # persistify - Changelog
+## v0.3.1
+- **Bug Fixes**
+  - proper file formatting - [2904943]( https://github.com/royriojas/persistify/commit/2904943 ), [royriojas](https://github.com/royriojas), 30/10/2015 16:42:41
+
+    
+- **Enhancements**
+  - Add --cache-id command line option - [9f31426]( https://github.com/royriojas/persistify/commit/9f31426 ), [Benjie Gillam](https://github.com/Benjie Gillam), 30/10/2015 07:39:15
+
+    
 ## v0.3.0
 - **Enhancements**
   - add `never-cache` and `command` options - [b81307d]( https://github.com/royriojas/persistify/commit/b81307d ), [royriojas](https://github.com/royriojas), 22/09/2015 02:18:57
