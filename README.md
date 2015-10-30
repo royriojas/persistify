@@ -57,6 +57,11 @@ Standard Options:
     More than one pattern to be ignored can be specified by repeating this option with other regex
     value to ignore
 
+  --cache-id                       [default: null]
+
+    If you're running multiple persistify instances from the same directory, use this to
+    differentiate them.
+
 ```
 
 ## Examples
