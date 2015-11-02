@@ -85,9 +85,13 @@ function run() {
     wb.pipe( outStream );
 
     outStream.on( 'error', function ( err ) {
-      nodeConsole.error( err );
+      nodeConsole.error( 'persistify error: ', err );
     } );
     outStream.on( 'close', function () {
+      if ( didError && !watch ) {
+        nodeConsole.error( 'persistify failed...' );
+        process.exit( 1 ); //eslint-disable-line
+      }
       if ( verbose && !didError ) {
         if ( watch ) {
           nodeConsole.error( bytes + ' bytes written to ' + outfile
