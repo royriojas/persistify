@@ -49,7 +49,8 @@ module.exports = function ( browserifyOpts, opts, argv ) {
   }
 
   var defaultCache = {
-    cache: {}, packageCache: {}
+    cache: {},
+    packageCache: {}
   };
 
   var persistifyCache = ignoreCache ? defaultCache : (cache.getKey( 'persistifyArgs' ) || defaultCache);
@@ -95,10 +96,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
       } );
     }
 
-    cache.setKey( 'persistifyArgs', {
-      cache: browserifyOpts.cache,
-      packageCache: browserifyOpts.packageCache
-    } );
+    cache.setKey( 'persistifyArgs', { cache: browserifyOpts.cache, packageCache: browserifyOpts.packageCache } );
   }
 
   normalizeCache();

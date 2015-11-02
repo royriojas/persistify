@@ -8,8 +8,10 @@
     "beautify": "esbeautifier 'index.js' 'bin/**/*.js' 'specs/**/*.js'",
     "beautify-check": "npm run beautify -- -k",
     "eslint": "eslinter 'index.js' 'bin/**/*.js' 'specs/**/*.js'",
-    "lint": "npm run beautify && npm run eslint",
-    "verify": "npm run beautify-check && npm run eslint",
+    "eslint-fix": "npm run eslint -- --fix",
+    "autofix": "npm run beautify && npm run eslint-fix",
+    "check": "npm run beautify-check && npm run eslint",
+    "verify": "npm run check",
     "install-hooks": "prepush install && changelogx install-hook && precommit install",
     "changelog": "changelogx -f markdown -o ./changelog.md",
     "do-changelog": "npm run changelog && git add ./changelog.md && git commit -m 'DOC: Generate changelog' --no-verify",
@@ -19,6 +21,7 @@
     "bump-minor": "npm run pre-v && npm version minor -m 'BLD: Release v%s' && npm run post-v",
     "bump-patch": "npm run pre-v && npm version patch -m 'BLD: Release v%s' && npm run post-v",
     "bundle": "./bin/cmd.js demo/dep1.js -o dist/bundle.js",
+    "test": "npm run verify",
     "bundle:watch": "./bin/cmd.js demo/dep1.js -o dist/bundle.js --watch"
   },
   "repository": {
@@ -36,8 +39,8 @@
   "devDependencies": {
     "babelify": "^6.1.3",
     "changelogx": "^1.0.18",
-    "esbeautifier": "^4.2.11",
-    "eslinter": "^3.0.1",
+    "esbeautifier": "^6.1.8",
+    "eslinter": "^3.2.1",
     "precommit": "^1.1.5",
     "prepush": "^3.1.4",
     "react": "^0.13.3",
