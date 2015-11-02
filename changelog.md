@@ -1,5 +1,14 @@
 
 # persistify - Changelog
+## v0.3.2
+- **Bug Fixes**
+  - make persistify fail with code 1 in case of errors. Fixes [#2](https://github.com/royriojas/persistify/issues/2) - [4cc4dc4]( https://github.com/royriojas/persistify/commit/4cc4dc4 ), [royriojas](https://github.com/royriojas), 02/11/2015 11:01:26
+
+    
+- **Build Scripts Changes**
+  - Add test script to verify the code - [5ff8fdf]( https://github.com/royriojas/persistify/commit/5ff8fdf ), [royriojas](https://github.com/royriojas), 02/11/2015 11:00:34
+
+    
 ## v0.3.1
 - **Bug Fixes**
   - proper file formatting - [2904943]( https://github.com/royriojas/persistify/commit/2904943 ), [royriojas](https://github.com/royriojas), 30/10/2015 16:42:41
