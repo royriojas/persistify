@@ -62,6 +62,10 @@ Standard Options:
     If you're running multiple persistify instances from the same directory, use this to
     differentiate them.
 
+  --cache-dir                      [default: node_modules/flat-cache/.cache]
+
+    By default, the cache is saved to the default directory that flat-cache sets. This sets a custom directory for the cache files.
+
 ```
 
 ## Examples
