@@ -11,7 +11,8 @@ function run() {
   var _argv = process.argv.slice( 2 );
   var persistifyArgs = subarg( _argv, {
     alias: {
-      'n': 'never-cache'
+      'n': 'never-cache',
+      'd': 'cache-directory'
     }
   } );
 
@@ -19,9 +20,11 @@ function run() {
   var recreate = persistifyArgs.recreate;
   var neverCache = persistifyArgs[ 'never-cache' ];
   var cacheId = persistifyArgs[ 'cache-id' ];
+  var cacheDir = persistifyArgs[ 'cache-directory' ];
 
   var w = require( '../' )( null, {
     cacheId: cacheId,
+    cacheDir: cacheDir,
     command: _argv.join( ' ' ),
     neverCache: neverCache,
     watch: watch,
