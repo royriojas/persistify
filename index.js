@@ -18,20 +18,21 @@ module.exports = function ( browserifyOpts, opts, argv ) {
 
   var id = 'persistify_' + hash( process.cwd() + trim( opts.cacheId ) );
   var depsCacheId = 'deps-cx-' + id;
+  var cacheDir = opts.cacheDir;
 
   var flatCache = require( 'flat-cache' );
   var fileEntryCache = require( 'file-entry-cache' );
 
   if ( opts.recreate ) {
-    flatCache.clearCacheById( id );
-    flatCache.clearCacheById( depsCacheId );
+    flatCache.clearCacheById( id, cacheDir );
+    flatCache.clearCacheById( depsCacheId, cacheDir );
   }
   // load the cache with id
-  var cache = flatCache.load( id );
+  var cache = flatCache.load( id, cacheDir );
 
   // load the file entry cache with id, or create a new
   // one if the previous one doesn't exist
-  var depsCacheFile = fileEntryCache.create( depsCacheId );
+  var depsCacheFile = fileEntryCache.create( depsCacheId, cacheDir );
 
   var ignoreCache = false;
 
