@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v0.3.3
+- **undefined**
+  - option to set cacheDir - [12ff7fa]( https://github.com/royriojas/persistify/commit/12ff7fa ), [Joey Baker](https://github.com/Joey Baker), 05/11/2015 13:53:10
+
+    
 ## v0.3.2
 - **Bug Fixes**
   - make persistify fail with code 1 in case of errors. Fixes [#2](https://github.com/royriojas/persistify/issues/2) - [4cc4dc4]( https://github.com/royriojas/persistify/commit/4cc4dc4 ), [royriojas](https://github.com/royriojas), 02/11/2015 11:01:26
