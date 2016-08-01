@@ -49,7 +49,7 @@
   "dependencies": {
     "browserify": "^12.0.1",
     "file-entry-cache": "^1.2.0",
-    "flat-cache": "^1.0.3",
+    "flat-cache": "^1.2.1",
     "hash-string": "^1.0.0",
     "jq-trim": "^0.1.1",
     "outpipe": "^1.1.1",
