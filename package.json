@@ -1,6 +1,6 @@
 {
   "name": "persistify",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "a wrapper around `browserify` and `watchify` to make incremental builds without the need of the watch mode",
   "main": "index.js",
   "bin": "bin/cmd.js",
