@@ -73,7 +73,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
       }
       cachedFiles.forEach( function ( file ) {
         for (var i = 0; i < neverCache.length; i++) {
-          var regex = parseAsRegex( neverCache[ 0 ] );
+          var regex = parseAsRegex( neverCache[ i ] );
 
           if ( file.match( regex ) ) {
             b.emit( 'skip:cache', file );
