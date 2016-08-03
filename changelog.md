@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v1.1.1
+- **Other changes**
+  - handle multi-item neverCache arrays ([#12](https://github.com/royriojas/persistify/issues/12)) - [3f7b832]( https://github.com/royriojas/persistify/commit/3f7b832 ), [Mike Chevett](https://github.com/Mike Chevett), 03/08/2016 12:09:40
+
+    
 ## v1.1.0
 - **Bug Fixes**
   - Bump flat-cache version - [6a4bdaf]( https://github.com/royriojas/persistify/commit/6a4bdaf ), [Jean Ponchon](https://github.com/Jean Ponchon), 01/08/2016 04:53:52
