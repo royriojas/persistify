@@ -1,5 +1,23 @@
 
 # persistify - Changelog
+## v2.0.0
+- **Bug Fixes**
+  - Use latest eslint - [14f6721]( https://github.com/royriojas/persistify/commit/14f6721 ), [Roy Riojas](https://github.com/Roy Riojas), 22/03/2018 20:05:39
+
+    
+- **Other changes**
+  - ignore watch passed to watchify ([#15](https://github.com/royriojas/persistify/issues/15)) - [23fa476]( https://github.com/royriojas/persistify/commit/23fa476 ), [Róbert Oroszi](https://github.com/Róbert Oroszi), 22/03/2018 19:20:53
+
+    * feat: ignore watch from watchify
+    
+    * fix: use double quotes
+    
+  - use browserify and watchify as peer and dev depedency ([#16](https://github.com/royriojas/persistify/issues/16)) - [08c825a]( https://github.com/royriojas/persistify/commit/08c825a ), [Róbert Oroszi](https://github.com/Róbert Oroszi), 22/03/2018 19:20:25
+
+    * chore: use browserify and watchify as peer and dev depedency
+    
+    * chore: notify users that browserify and watchify are mandatory for using persistify
+    
 ## v1.1.1
 - **Other changes**
   - handle multi-item neverCache arrays ([#12](https://github.com/royriojas/persistify/issues/12)) - [3f7b832]( https://github.com/royriojas/persistify/commit/3f7b832 ), [Mike Chevett](https://github.com/Mike Chevett), 03/08/2016 12:09:40
