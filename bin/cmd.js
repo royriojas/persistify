@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 var fs = require( 'fs' );
 var path = require( 'path' );
 var outpipe = require( 'outpipe' );
@@ -23,12 +25,12 @@ function run() {
   var cacheDir = persistifyArgs[ 'cache-dir' ];
 
   var w = require( '../' )( null, {
-    cacheId: cacheId,
-    cacheDir: cacheDir,
+    cacheId,
+    cacheDir,
     command: _argv.join( ' ' ),
-    neverCache: neverCache,
-    watch: watch,
-    recreate: recreate
+    neverCache,
+    watch,
+    recreate
   }, process.argv.slice( 2 ) );
 
   var outfile = w.argv.o || w.argv.outfile;
@@ -36,14 +38,11 @@ function run() {
 
   if ( w.argv.version ) {
     nodeConsole.error( 'persistify v' + require( '../package.json' ).version +
-        ' (in ' + path.resolve( __dirname, '..' ) + ')'
-    );
+        ' (in ' + path.resolve( __dirname, '..' ) + ')' );
     nodeConsole.error( 'watchify v' + require( 'watchify/package.json' ).version +
-        ' (in ' + path.dirname( require.resolve( 'watchify' ) ) + ')'
-    );
+        ' (in ' + path.dirname( require.resolve( 'watchify' ) ) + ')' );
     nodeConsole.error( 'browserify v' + require( 'browserify/package.json' ).version +
-        ' (in ' + path.dirname( require.resolve( 'browserify' ) ) + ')'
-    );
+        ' (in ' + path.dirname( require.resolve( 'browserify' ) ) + ')' );
     return;
   }
 
@@ -97,13 +96,11 @@ function run() {
       }
       if ( verbose && !didError ) {
         if ( watch ) {
-          nodeConsole.error( bytes + ' bytes written to ' + outfile
-              + ' (' + (time / 1000).toFixed( 2 ) + ' seconds)'
-          );
+          nodeConsole.error( bytes + ' bytes written to ' + outfile +
+              ' (' + (time / 1000).toFixed( 2 ) + ' seconds)' );
         } else {
-          nodeConsole.error( 'bundle done! '
-              + ' (' + (time / 1000).toFixed( 2 ) + ' seconds)'
-          );
+          nodeConsole.error( 'bundle done! ' +
+              ' (' + (time / 1000).toFixed( 2 ) + ' seconds)' );
         }
       }
 
@@ -115,12 +112,12 @@ function run() {
 }
 
 try {
-  require.resolve( "browserify" );
-  require.resolve( "watchify" );
+  require.resolve( 'browserify' );
+  require.resolve( 'watchify' );
 } catch (x) {
-  // eslint-disable-next-line no-console
-  console.error( "browserify and watchify are mandatory, please install those!" );
-  process.exit(1);
+  console.error( 'browserify and watchify are mandatory, please install them separatedly!' );
+  console.error( '  npm i --save-dev browserify watchify  ' );
+  process.exit( 1 ); // eslint-disable-line
 }
 
 run();

@@ -116,9 +116,7 @@ module.exports = function ( browserifyOpts, opts, argv ) {
   }
 
   if ( opts.watch ) {
-    b = watchify( b, {
-      ignoreWatch: b.argv[ "ignore-watch" ] || b.argv.iw
-    } );
+    b = watchify( b, { ignoreWatch: b.argv[ 'ignore-watch' ] || b.argv.iw } );
   }
 
   collect();

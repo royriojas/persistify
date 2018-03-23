@@ -15,7 +15,7 @@ Add unit tests
 ## Install
 
 ```bash
-npm i -g persistify
+npm i persistify watchify browserify
 ```
 
 ## CLI options
@@ -74,29 +74,29 @@ Standard Options:
 # this will browserify src/foo.js and move it to dist/foo.js
 # the cache is constructed the first time the command is run so this might take a few
 # seconds depending on the complexity of the files you want to browserify
-persistify src/foo.js -o dist/foo.js
+./node_modules/.bin/persistify src/foo.js -o dist/foo.js
 
 # next builds will be benefited by the cache
 # noticeable reducing the building time
-persistify src/foo.js -o dist/foo.js
+./node_modules/.bin/persistify src/foo.js -o dist/foo.js
 
 # reconstruct the cache, this useful when a transform file has changed or
 # the cache just started to behave like a spoiled child
-persistify src/foo.js -o dist/foo.js --recreate
+./node_modules/.bin/persistify src/foo.js -o dist/foo.js --recreate
 
 # this will use the cache and watchify to provide faster startup times on watch mode
-persistify src/foo.js -o dist/foo.js --watch
+./node_modules/.bin/persistify src/foo.js -o dist/foo.js --watch
 
 # this will just use the cache and use a transform
 # (all the parameters are just passed to browserify
 # so it should work with any transform)
-persistify src/foo.js -t babelify -o dist/foo.js --watch
+./node_modules/.bin/persistify src/foo.js -t babelify -o dist/foo.js --watch
 
 # this will just use the cache and use two transforms
 # but will never add to the cache any files that match the `m.less` extension
 # since those files can also require files and those files won't be cached
 # this is the safer way to prevent those changes to be skipped because of the cache
-persistify src/foo.js -t babelify -t simpless -o dist/foo.js -n '\.less$'
+./node_modules/.bin/persistify src/foo.js -t babelify -t simpless -o dist/foo.js -n '\.less$'
 ```
 
 ## As a node module
@@ -147,7 +147,7 @@ Because those files are not loaded thru browserify so the cache will ignore them
 
 ```bash
 # the following will exclude files ending in `.less` from being kept in the cache
-persistify src/foo.js -t lessify -o dist/foo.js -n '\.less$'
+./node_modules/.bin/persistify src/foo.js -t lessify -o dist/foo.js -n '\.less$'
 ```
 
 **Example: Using the node api**
