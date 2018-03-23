@@ -18,6 +18,8 @@ Add unit tests
 npm i persistify watchify browserify
 ```
 
+**Important** persistify used to bundle watchify and browserify. Starting from version 2.0.0 they are declared as peer dependencies and should be installed separatedly
+
 ## CLI options
 
 Apart from all the browserify and watchify options the following are also available:
