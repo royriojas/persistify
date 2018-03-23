@@ -114,4 +114,13 @@ function run() {
   bundle();
 }
 
+try {
+  require.resolve( "browserify" );
+  require.resolve( "watchify" );
+} catch (x) {
+  // eslint-disable-next-line no-console
+  console.error( "browserify and watchify are mandatory, please install those!" );
+  process.exit(1);
+}
+
 run();
