@@ -1,5 +1,10 @@
 
 # persistify - Changelog
+## v2.0.1
+- **Bug Fixes**
+  - Add note to readme about watchify and browserify being now peer dependencies - [eec63f6]( https://github.com/royriojas/persistify/commit/eec63f6 ), [Roy Riojas](https://github.com/Roy Riojas), 22/03/2018 20:16:15
+
+    
 ## v2.0.0
 - **Bug Fixes**
   - Use latest eslint - [14f6721]( https://github.com/royriojas/persistify/commit/14f6721 ), [Roy Riojas](https://github.com/Roy Riojas), 22/03/2018 20:05:39
