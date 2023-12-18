@@ -51,8 +51,8 @@
     "watchify": "^3.11.0"
   },
   "dependencies": {
-    "file-entry-cache": "^1.2.0",
-    "flat-cache": "^1.2.1",
+    "file-entry-cache": "^8.0.0",
+    "flat-cache": "^4.0.0",
     "hash-string": "^1.0.0",
     "jq-trim": "^0.1.1",
     "outpipe": "^1.1.1",
